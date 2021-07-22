@@ -1,0 +1,93 @@
+
+**** Build of configuration Release for project CamImage ****
+
+make all 
+Building file: ../src/CamImage.cpp
+Invoking: GCC C++ Compiler
+g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/CamImage.d" -MT"src/CamImage.d" -o "src/CamImage.o" "../src/CamImage.cpp"
+../src/CamImage.cpp:11:17: fatal error: cv.h: No such file or directory
+compilation terminated.
+make: *** [src/CamImage.o] Error 1
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+Building file: ../src/CamImage.cpp
+Invoking: GCC C++ Compiler
+g++ -I/usr/local/include/opencv -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/CamImage.d" -MT"src/CamImage.d" -o "src/CamImage.o" "../src/CamImage.cpp"
+Finished building: ../src/CamImage.cpp
+ 
+Building target: CamImage
+Invoking: GCC C++ Linker
+g++ -L/usr/local/lib -o "CamImage"  ./src/CamImage.o   -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_video
+Finished building target: CamImage
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+Building file: ../src/CamImage.cpp
+Invoking: GCC C++ Compiler
+g++ -I/usr/local/include/opencv -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/CamImage.d" -MT"src/CamImage.d" -o "src/CamImage.o" "../src/CamImage.cpp"
+Finished building: ../src/CamImage.cpp
+ 
+Building target: CamImage
+Invoking: GCC C++ Linker
+g++ -L/usr/local/lib -o "CamImage"  ./src/CamImage.o   -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_video
+Finished building target: CamImage
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project CamImage ****
+
+make all 
+make: Nothing to be done for `all'.
+
+**** Build Finished ****

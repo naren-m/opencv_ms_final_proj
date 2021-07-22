@@ -1,0 +1,31 @@
+#include "stdafx.h"
+#include "videoInput.h"
+#include "cv.h"
+#include "highgui.h"
+
+int main()
+{
+    videoInput VI;
+    int numDevices = VI.listDevices();
+    int device1= 0;
+    VI.setupDevice(device1);
+    int width = VI.getWidth(device1);
+    int height = VI.getHeight(device1);
+    IplImage* image= cvCreateImage(cvSize(width, height), 8, 3);
+    unsigned char* yourBuffer = new unsigned char[VI.getSize(device1)];
+    cvNamedWindow("test");
+    while(1)
+    {
+        VI.getPixels(device1, yourBuffer, false, false);
+        image->imageData = (char*)yourBuffer;
+        cvConvertImage(image, image, CV_CVTIMG_FLIP);
+        cvShowImage("test", image);
+        if(cvWaitKey(15)==27) break;
+    }
+
+    VI.stopDevice(device1);
+    cvDestroyWindow("test");
+    cvReleaseImage(&image);
+
+    return 0;
+}
