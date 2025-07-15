@@ -1,0 +1,71 @@
+#include <cv.h>
+#include <highgui.h>
+
+using namespace std;
+using namespace cv;
+
+// Substracting two sequential frames
+
+int main()
+{
+  
+  CvCapture* capture = cvCaptureFromCAM(0);
+  
+  if(!capture)
+    {
+      printf("couldnot initialize");
+      return -1;
+    }
+  
+  cvNamedWindow("frame");  
+  cvNamedWindow("frame2");
+  cvNamedWindow("sub");
+  cvNamedWindow("abssub");
+    
+  IplImage* curr1 =cvQueryFrame(capture);
+  IplImage* prev1 = NULL;
+  int count=0;
+
+  
+  while(1)
+    {
+      
+      if(prev1)
+	{ curr1 = NULL;
+	curr1 = cvCloneImage(prev1);
+	}
+      prev1 = NULL;
+      prev1= cvQueryFrame(capture);
+
+
+      IplImage* imgRGB = cvCreateImage(cvGetSize(curr1),8,3);
+      IplImage* sub = cvCreateImage(cvGetSize(curr1),8,3);
+      
+      IplImage* abssub = cvCreateImage(cvGetSize(curr1),IPL_DEPTH_8U,3);    
+            
+      cvSub(curr1,prev1,sub,NULL);
+      cvAbsDiff(curr1,prev1,abssub);     
+      // cvZero(prev1);
+           
+      cvShowImage("sub",sub);
+      cvShowImage("abssub",abssub);
+      cvShowImage("frame",curr1);
+      cvShowImage("frame2",prev1);
+      
+      // cvReleaseImage(&curr1);
+      cvReleaseImage(&imgRGB);
+      
+char c = cvWaitKey(33);
+ if(c == 27)
+	  break;
+    }
+  cvReleaseCapture(&capture);
+
+}
+
+
+
+
+
+
+  

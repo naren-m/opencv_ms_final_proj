@@ -1,0 +1,98 @@
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Documentation
+*.md
+docs/
+*.rst
+
+# Archives and original C++ code
+archive/
+*.tar
+*.tar.*
+*.zip
+*.rar
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test files
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Large media files (adjust as needed)
+*.avi
+*.mp4
+*.mov
+*.mkv
+*.wmv
+
+# C++ files (since we're dockerizing Python only)
+*.cpp
+*.h
+*.hpp
+*.c
+*.o
+*.exe
+makefile
+Makefile
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Node modules (if any)
+node_modules/
+
+# Output directories
+outputs/
+results/

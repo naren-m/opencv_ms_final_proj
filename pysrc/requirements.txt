@@ -1,0 +1,33 @@
+# OpenCV Python Project Requirements
+# Install with: pip install -r requirements.txt
+
+# Core computer vision library
+opencv-python==4.8.1.78
+
+# Alternative OpenCV with contrib modules (uncomment if needed)
+# opencv-contrib-python==4.8.1.78
+
+# Numerical computing
+numpy>=1.21.0
+
+# Plotting and visualization
+matplotlib>=3.5.0
+
+# Optional: Enhanced image processing
+Pillow>=8.0.0
+
+# Optional: Scientific computing
+scipy>=1.7.0
+
+# Optional: Data analysis (if working with datasets)
+pandas>=1.3.0
+
+# Optional: GUI enhancements (if using advanced GUI features)
+PyQt5>=5.15.0
+
+# Optional: Performance optimization
+numba>=0.56.0
+
+# Development and testing (optional)
+pytest>=6.0.0
+jupyter>=1.0.0

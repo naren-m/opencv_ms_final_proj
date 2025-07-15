@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # Development environment with camera access and X11 forwarding
+  opencv-dev:
+    build:
+      context: .
+      target: development
+    container_name: opencv_dev
+    volumes:
+      - ./pysrc:/app
+      - ./outputs:/app/outputs
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev/video0:/dev/video0  # Camera access (adjust device as needed)
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    devices:
+      - /dev/video0:/dev/video0  # Camera device
+    privileged: true  # Required for camera access
+    stdin_open: true
+    tty: true
+    networks:
+      - opencv-network
+    
+  # Production environment
+  opencv-prod:
+    build:
+      context: .
+      target: production
+    container_name: opencv_prod
+    volumes:
+      - ./outputs:/app/outputs:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev/video0:/dev/video0
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    devices:
+      - /dev/video0:/dev/video0
+    privileged: true
+    networks:
+      - opencv-network
+    restart: unless-stopped
+
+  # Jupyter notebook service for interactive development
+  jupyter:
+    build:
+      context: .
+      target: development
+    container_name: opencv_jupyter
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./pysrc:/app
+      - ./outputs:/app/outputs
+      - ./notebooks:/app/notebooks
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - opencv-network
+
+  # Web-based OpenCV application (if needed)
+  opencv-web:
+    build:
+      context: .
+      target: base
+    container_name: opencv_web
+    command: python -m http.server 8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./pysrc:/app
+      - ./outputs:/app/outputs
+    networks:
+      - opencv-network
+
+networks:
+  opencv-network:
+    driver: bridge
+
+volumes:
+  opencv-outputs:
+    driver: local
