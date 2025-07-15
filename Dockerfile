@@ -6,37 +6,32 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    # OpenCV dependencies
+# Install minimal system dependencies for OpenCV
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Essential OpenCV runtime dependencies
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender1 \
     libgomp1 \
-    libglib2.0-0 \
-    libgtk2.0-dev \
-    pkg-config \
-    # Camera and video support
-    libv4l-dev \
-    v4l-utils \
-    # GUI support (for X11 forwarding)
+    # Basic GUI support
     libx11-6 \
     libxss1 \
-    libgconf-2-4 \
-    libxrandr2 \
-    libasound2 \
-    libpangocairo-1.0-0 \
-    libatk1.0-0 \
+    # Camera support
+    libv4l-0 \
+    # OpenGL support for OpenCV
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    # Additional OpenCV dependencies
     libgtk-3-0 \
-    libgdk-pixbuf2.0-0 \
-    # Build tools for potential compilation
-    gcc \
-    g++ \
-    make \
-    # Cleanup
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    # Cleanup in same layer
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/*
 
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash opencv_user
@@ -68,23 +63,23 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import cv2; print('OpenCV version:', cv2.__version__)" || exit 1
 
-# Default command
-CMD ["python", "object_tracking.py"]
+# Default command (headless mode for containers)
+CMD ["python", "object_tracking.py", "--headless"]
 
 # Development stage with additional tools
 FROM base as development
 
 USER root
 
-# Install development tools
-RUN apt-get update && apt-get install -y \
+# Install minimal development tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     git \
     curl \
-    wget \
-    htop \
-    tree \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/*
 
 # Install development Python packages
 RUN pip install --no-cache-dir \
