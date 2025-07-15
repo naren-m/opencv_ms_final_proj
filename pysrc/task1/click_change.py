@@ -43,7 +43,7 @@ def mouse_callback(event, x, y, flags, param):
     """
     Mouse callback function for interactive color selection
     """
-    global mouse_pos, clicked, img_display, img_original
+    global mouse_pos, clicked, img_display
     
     if event == cv2.EVENT_LBUTTONDOWN:
         mouse_pos = (x, y)

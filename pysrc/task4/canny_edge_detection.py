@@ -122,7 +122,6 @@ def canny_on_image(image_path):
     """
     Apply Canny edge detection to a static image with interactive controls
     """
-    global canny_low, canny_high
     
     # Load image
     img = cv2.imread(image_path)

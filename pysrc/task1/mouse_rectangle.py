@@ -12,7 +12,7 @@ def mouse_callback(event, x, y, flags, param):
     """
     Mouse callback function for interactive rectangle drawing
     """
-    global drawing, start_point, end_point, img_display, img_original
+    global drawing, start_point, end_point, img_display
     
     if event == cv2.EVENT_LBUTTONDOWN:
         drawing = True
